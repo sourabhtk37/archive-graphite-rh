@@ -3,7 +3,7 @@ import logging.config
 import os
 import struct
 import sys
-from os.path import isdir, join
+from os.path import exists, isdir, join
 
 import requests
 
@@ -47,12 +47,23 @@ def write_data(datapoints, args):
         datapoints[0][1]
     beg_timestamp = datapoints[0][1]
 
-    values = [v for v, t in datapoints]
+    values = [0.0 if v is None else v for v, t in datapoints]
     format = '!' + ('d' * len(values))
     packedValues = struct.pack(format, *values)
 
     file_path = join(fsPath, "{ts}@{rsol}".format(
         ts=beg_timestamp, rsol=resolution))
+
+    # rename file instead of overwriting
+    file_inc = 1
+    while exists(file_path):
+        if len(file_path.rsplit('.', 1)) > 1:
+            file_path, file_inc = file_path.rsplit('.', 1)
+            file_inc = int(file_inc)
+            file_inc += 1
+        file_path = file_path + "." + str(file_inc)
+        file_inc += 1
+
     logging.debug("Writing to file: {0}".format(file_path))
     with open(file_path, 'w+b') as fileHandle:
         try:

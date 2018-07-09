@@ -1,3 +1,4 @@
+import fnmatch
 import logging
 import os
 import zlib
@@ -13,11 +14,10 @@ def getFilesystemPath(root, nodePath):
     return join(root, nodePath.replace('.', os.sep))
 
 
-import os
-import fnmatch
-
-
 def find(pattern, path):
+    """Find all files that matches the patter in a 
+    given directory
+    """
     result = []
     for root, dirs, files in os.walk(path):
         for name in files:
@@ -29,11 +29,6 @@ def find(pattern, path):
 # todo: UnicodeDecodeError while reading file
 def gzip_archive(file_path):
     pass
-    # if len(file_inc) > 1:
-    #     os.rename(file_path, file_path+file_inc)
-    # else:
-    #     os.rename(file_path, file_path+'.1')
-
     # if exists(file_path):
     #     try:
     #         with open(file_path) as f_in:
