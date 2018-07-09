@@ -7,7 +7,7 @@ from os.path import exists, isdir, join
 
 import requests
 
-from utils import getFilesystemPath, gzip_archive
+from .utils import getFilesystemPath, gzip_archive
 
 logging.config.fileConfig('../logging.conf')
 logger = logging.getLogger(__name__)

@@ -26,7 +26,7 @@ def find(pattern, path):
     return result
 
 
-# todo: UnicodeDecodeError while reading file
+# todo: implement compression
 def gzip_archive(file_path):
     pass
     # if exists(file_path):
