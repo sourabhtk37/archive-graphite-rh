@@ -9,7 +9,7 @@ import requests
 
 from utils import getFilesystemPath, gzip_archive
 
-logging.config.fileConfig('logging.conf')
+logging.config.fileConfig('../logging.conf')
 logger = logging.getLogger(__name__)
 
 parser = argparse.ArgumentParser(description="archive metric group")
